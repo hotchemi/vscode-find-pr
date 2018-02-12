@@ -15,10 +15,20 @@
     ],
     "main": "./out/extension",
     "contributes": {
-        "commands": [{
-            "command": "extension.sayHello",
-            "title": "Hello World"
-        }]
+        "menus": {
+            "explorer/context": [
+                {
+                    "command": "extension.sayHello",
+                    "when": "explorerResourceIsFolder"
+                }
+            ]
+        },
+        "commands": [
+            {
+                "command": "extension.sayHello",
+                "title": "Find Pull Request"
+            }
+        ]
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
