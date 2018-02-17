@@ -44,6 +44,7 @@
         "vscode": "^1.1.6"
     },
     "dependencies": {
+        "moment": "^2.20.1",
         "valid-url": "^1.0.9"
     }
 }
