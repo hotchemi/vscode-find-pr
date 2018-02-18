@@ -1,50 +1,38 @@
 {
-    "name": "vscode-find-pr",
-    "displayName": "vscode-find-pr",
-    "description": "A vscode plugin jumps to pull request url",
-    "version": "0.0.1",
-    "publisher": "hotchemi",
-    "engines": {
-        "vscode": "^1.19.0"
-    },
-    "categories": [
-        "Other"
-    ],
-    "activationEvents": [
-        "onCommand:extension.sayHello"
-    ],
-    "main": "./out/extension",
-    "contributes": {
-        "menus": {
-            "explorer/context": [
-                {
-                    "command": "extension.sayHello",
-                    "when": "explorerResourceIsFolder"
-                }
-            ]
-        },
-        "commands": [
-            {
-                "command": "extension.sayHello",
-                "title": "Find Pull Request"
-            }
-        ]
-    },
-    "scripts": {
-        "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "npm run compile && node ./node_modules/vscode/bin/test"
-    },
-    "devDependencies": {
-        "@types/mocha": "^2.2.42",
-        "@types/node": "^7.0.43",
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.6"
-    },
-    "dependencies": {
-        "moment": "^2.20.1",
-        "valid-url": "^1.0.9"
-    }
+  "name": "vscode-find-pr",
+  "displayName": "vscode-find-pr",
+  "description": "A vscode plugin jumps to pull request url",
+  "version": "0.0.1",
+  "publisher": "hotchemi",
+  "engines": {
+    "vscode": "^1.19.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["onCommand:extension.sayHello"],
+  "main": "./out/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.sayHello",
+        "title": "Find Pull Request"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^2.2.42",
+    "@types/node": "^7.0.43",
+    "typescript": "^2.6.1",
+    "vscode": "^1.1.6"
+  },
+  "dependencies": {
+    "moment": "^2.20.1",
+    "valid-url": "^1.0.9"
+  }
 }

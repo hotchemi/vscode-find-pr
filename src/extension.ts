@@ -1,15 +1,33 @@
 import * as vscode from "vscode";
 import { open } from "fs";
+import { spawn } from "child_process";
+import child_process = require("child_process");
+import { GIT_COMMAND_IN_PATH } from "./constants";
+const readline = require("readline");
+import Path = require("path");
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-  // The command has been defined in the package.json file
-  // Now provide the implementation of the command with  registerCommand
-  // The commandId parameter must match the command field in package.json
   let disposable = vscode.commands.registerCommand("extension.sayHello", () => {
-    // The code you place here will be executed every time your command is executed
-    openUrl("https://www.google.com");
+    const filename = vscode.window.activeTextEditor.document.fileName;
+    const lineNumber = vscode.window.activeTextEditor.selection.active.line;
+
+
+
+    const currentDirectory = Path.dirname(filename);
+    const gitConfig = vscode.workspace.getConfiguration("git");
+    const command = <string>gitConfig.get("path", "git");
+    const gitExecOptions = {
+      cwd: currentDirectory
+    };
+
+    const blame = spawn("git", ["blame", "--first-parent", "-L", `${lineNumber},${lineNumber}`, filename], gitExecOptions);
+    const lines = readline.createInterface({ input: blame.stdout });
+    lines.on("line", input => {
+      const [hash, content] = input.split(/ .*?\) /);
+      console.log(hash);
+      console.log("********");
+      console.log(content);
+    });
   });
 
   context.subscriptions.push(disposable);
