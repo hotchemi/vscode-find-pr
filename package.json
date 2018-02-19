@@ -7,8 +7,12 @@
   "engines": {
     "vscode": "^1.19.0"
   },
-  "categories": ["Other"],
-  "activationEvents": ["onCommand:extension.sayHello"],
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.sayHello"
+  ],
   "main": "./out/extension",
   "contributes": {
     "commands": [
