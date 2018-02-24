@@ -1,14 +1,15 @@
 import { commands, ExtensionContext } from "vscode";
 import { Controller } from "./controller";
+import { command } from "./constants";
 
 export function activate(context: ExtensionContext) {
   const controller = new Controller();
   const disposable = commands.registerCommand(
-    "extension.sayHello",
+    command,
     controller.execute,
     controller
   );
-  context.subscriptions.push(controller, disposable);
+  context.subscriptions.push(disposable);
 }
 
 export function deactivate() {}
