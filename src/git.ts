@@ -18,14 +18,15 @@ export const blame = (
   return hash;
 };
 
+// TODO: follow https://github.com/shiraji/find-pull-request/blob/544e3d311b47860ebcff63cc2821c035f8a263e7/src/main/kotlin/com/github/shiraji/findpullrequest/model/FindPullRequestModel.kt#L75
 export const getPullRequestNumber = (
   hash: string,
   options: SpawnSyncOptions
 ): string | undefined => {
   const ssr = spawnSync(git, ["show", "--oneline", hash], options);
-  const msg = /Merge\s+(?:pull\s+request|pr)\s+\#?(\d+)\s/i;
-  const matcher = msg.exec(ssr.stdout.toString());
-  return matcher ? matcher[1] : undefined;
+  const grep = /Merge\s+(?:pull\s+request|pr)\s+\#?(\d+)\s/i;
+  const matcher = grep.exec(ssr.stdout.toString());
+  return matcher[1] ? matcher[1] : undefined;
 };
 
 export const findRemoteUrl = (options: SpawnSyncOptions): string | Error => {

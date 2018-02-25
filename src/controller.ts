@@ -2,6 +2,8 @@ import { window } from "vscode";
 import Path = require("path");
 import { SpawnSyncOptions } from "child_process";
 import { blame, getPullRequestNumber, findRemoteUrl } from "./git";
+import { openUrl } from "./browser";
+import { buildOpenUrl } from "./utils";
 
 export class Controller {
   activeFileName(): string | undefined {
@@ -27,14 +29,14 @@ export class Controller {
 
   async execute() {
     const options = this.gitExecOptions();
-    const hash = blame(
-      this.activeFileName(),
-      this.activeLineNumber(),
-      options
-    );
-    console.log("blame:", hash);
-    const number = getPullRequestNumber(hash, options);
-    console.log("PR:", number);
-    console.log(findRemoteUrl(options));
+    const remoteUrl = findRemoteUrl(options);
+    if (remoteUrl instanceof Error) {
+      window.showErrorMessage(remoteUrl.message);
+      return;
+    }
+    const hash = blame(this.activeFileName(), this.activeLineNumber(), options);
+    const prNumber = getPullRequestNumber(hash, options);
+    const url = buildOpenUrl(remoteUrl, prNumber);
+    openUrl(url);
   }
 }
