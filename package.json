@@ -1,24 +1,31 @@
 {
   "name": "vscode-find-pr",
   "displayName": "vscode-find-pr",
-  "description": "A vscode plugin jumps to pull request url",
+  "description": "A vscode plugin jumps to pull request url.",
   "version": "0.0.1",
   "publisher": "hotchemi",
   "engines": {
     "vscode": "^1.19.0"
   },
   "categories": [
-    "Other"
+    "SCM Providers"
   ],
   "activationEvents": [
-    "onCommand:extension.sayHello"
+    "onCommand:find-pr.findPullRequest"
   ],
   "main": "./out/extension",
   "contributes": {
     "commands": [
       {
-        "command": "extension.sayHello",
+        "command": "find-pr.findPullRequest",
         "title": "Find Pull Request"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "find-pr.findPullRequest",
+        "key": "alt+f",
+        "mac": "alt+f"
       }
     ]
   },

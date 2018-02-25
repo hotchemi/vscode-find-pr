@@ -1,9 +1,4 @@
-import {
-  SpawnOptions,
-  execFile,
-  SpawnSyncOptions,
-  spawnSync
-} from "child_process";
+import { execFile, SpawnSyncOptions, spawnSync } from "child_process";
 import * as child_process from "child_process";
 import { command, git } from "./constants";
 
@@ -11,20 +6,26 @@ export function execOptions(cwd: string): SpawnSyncOptions {
   return {
     cwd
   };
-};
+}
 
 export const blame = (
   filename: string,
   line: number,
   options: SpawnSyncOptions
 ): string | undefined => {
-  const args = ["blame", "--first-parent", "-l", "-L", `${line},${line}`, filename];
+  const args = [
+    "blame",
+    "--first-parent",
+    "-l",
+    "-L",
+    `${line},${line}`,
+    filename
+  ];
   const ssr = spawnSync(git, args, options);
   const [hash, content] = ssr.stdout.toString().split(/ .*?\) /);
-  return hash;
+  return hash.replace(/\^/g, ""); // trim like ^518289f318721509f49e5951d537f33d45532d8
 };
 
-// TODO: follow https://github.com/shiraji/find-pull-request/blob/544e3d311b47860ebcff63cc2821c035f8a263e7/src/main/kotlin/com/github/shiraji/findpullrequest/model/FindPullRequestModel.kt#L75
 export const getPullRequestNumber = (
   hash: string,
   options: SpawnSyncOptions
@@ -42,13 +43,9 @@ export const findRemoteUrl = (options: SpawnSyncOptions): string | Error => {
     .split(/\r\n|\r|\n/)
     .filter(Boolean);
   if (remotes.length > 1 || remotes.length === 0) {
-    return new Error(
-      "multiple remote repos has been registered."
-    );
+    return new Error("multiple remote repos has been registered.");
   } else if (remotes.length === 0) {
-    return new Error(
-      "No remote repo has been registered."
-    );
+    return new Error("No remote repo has been registered.");
   }
   const remote = remotes.shift();
   return spawnSync(
