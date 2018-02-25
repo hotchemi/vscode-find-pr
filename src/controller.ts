@@ -1,6 +1,7 @@
 import { window } from "vscode";
 import Path = require("path");
-import { SpawnSyncOptions, spawn } from "child_process";
+import { SpawnSyncOptions } from "child_process";
+import { blame, getPullRequestNumber, findRemoteUrl } from "./git";
 
 export class Controller {
   activeFileName(): string | undefined {
@@ -25,25 +26,15 @@ export class Controller {
   }
 
   async execute() {
-    const filename = this.activeFileName();
-    const line = this.activeLineNumber();
-    const currentDir = this.activeDirName();
-    const options = {
-      cwd: currentDir
-    };
-
-    const blame = spawn(
-      "git",
-      ["blame", "--first-parent", "-L", `${line},${line}`, filename],
+    const options = this.gitExecOptions();
+    const hash = blame(
+      this.activeFileName(),
+      this.activeLineNumber(),
       options
     );
-    const readline = require("readline");
-    const lines = readline.createInterface({ input: blame.stdout });
-    lines.on("line", input => {
-      const [hash, content] = input.split(/ .*?\) /);
-      console.log(hash);
-    });
+    console.log("blame:", hash);
+    const number = getPullRequestNumber(hash, options);
+    console.log("PR:", number);
+    console.log(findRemoteUrl(options));
   }
-
-  dispose(): void {}
 }
