@@ -7,12 +7,18 @@ import {
 import * as child_process from "child_process";
 import { command, git } from "./constants";
 
+export function execOptions(cwd: string): SpawnSyncOptions {
+  return {
+    cwd
+  };
+};
+
 export const blame = (
   filename: string,
   line: number,
   options: SpawnSyncOptions
 ): string | undefined => {
-  const args = ["blame", "--first-parent", "-L", `${line},${line}`, filename];
+  const args = ["blame", "--first-parent", "-l", "-L", `${line},${line}`, filename];
   const ssr = spawnSync(git, args, options);
   const [hash, content] = ssr.stdout.toString().split(/ .*?\) /);
   return hash;
@@ -26,7 +32,7 @@ export const getPullRequestNumber = (
   const ssr = spawnSync(git, ["show", "--oneline", hash], options);
   const grep = /Merge\s+(?:pull\s+request|pr)\s+\#?(\d+)\s/i;
   const matcher = grep.exec(ssr.stdout.toString());
-  return matcher[1] ? matcher[1] : undefined;
+  return matcher && matcher.length > 1 ? matcher[1] : undefined;
 };
 
 export const findRemoteUrl = (options: SpawnSyncOptions): string | Error => {
@@ -37,7 +43,11 @@ export const findRemoteUrl = (options: SpawnSyncOptions): string | Error => {
     .filter(Boolean);
   if (remotes.length > 1 || remotes.length === 0) {
     return new Error(
-      "multiple or no remote candidates so that can't decide a base url."
+      "multiple remote repos has been registered."
+    );
+  } else if (remotes.length === 0) {
+    return new Error(
+      "No remote repo has been registered."
     );
   }
   const remote = remotes.shift();

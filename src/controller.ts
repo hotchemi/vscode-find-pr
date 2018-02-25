@@ -1,42 +1,60 @@
 import { window } from "vscode";
-import Path = require("path");
-import { SpawnSyncOptions } from "child_process";
-import { blame, getPullRequestNumber, findRemoteUrl } from "./git";
-import { openUrl } from "./browser";
-import { buildOpenUrl } from "./utils";
+import { blame, getPullRequestNumber, findRemoteUrl, execOptions } from "./git";
+import { githubUrl, openUrl, relativeFilePath, md5 } from "./utils";
+import { isEmpty } from "lodash";
+import {
+  activeFile,
+  activeLineNumber,
+  isActiveEditorValid,
+  rootPath
+} from "./editor";
 
 export class Controller {
-  activeFileName(): string | undefined {
-    return window.activeTextEditor && window.activeTextEditor.document.fileName;
-  }
+  execute() {
+    if (!isActiveEditorValid()) {
+      window.showErrorMessage("Could not find active titled document.");
+      return;
+    }
 
-  activeDirName(): string | undefined {
-    const fileName = this.activeFileName();
-    return fileName && Path.dirname(fileName);
-  }
+    const root = rootPath();
+    if (root === undefined) {
+      window.showErrorMessage("No folder has been opened.");
+      return;
+    }
 
-  activeLineNumber(): number | undefined {
-    return (
-      window.activeTextEditor && window.activeTextEditor.selection.active.line
-    );
-  }
-
-  gitExecOptions(): SpawnSyncOptions {
-    return {
-      cwd: this.activeDirName()
-    };
-  }
-
-  async execute() {
-    const options = this.gitExecOptions();
+    const options = execOptions(root);
     const remoteUrl = findRemoteUrl(options);
     if (remoteUrl instanceof Error) {
       window.showErrorMessage(remoteUrl.message);
       return;
     }
-    const hash = blame(this.activeFileName(), this.activeLineNumber(), options);
-    const prNumber = getPullRequestNumber(hash, options);
-    const url = buildOpenUrl(remoteUrl, prNumber);
-    openUrl(url);
+
+    const file = activeFile();
+    const line = activeLineNumber();
+    if (file === undefined || line === undefined) {
+      window.showErrorMessage("Could not find active document.");
+      return;
+    }
+
+    const hash = blame(file.fileName, line, options);
+    if (hash === undefined || isEmpty(hash)) {
+      window.showErrorMessage("Could not find revision hash.");
+      return;
+    }
+
+    const pullRequestNo = getPullRequestNumber(hash, options);
+    const md5Hash = md5(relativeFilePath());
+    const url = githubUrl(remoteUrl, pullRequestNo, hash, md5Hash);
+    if (pullRequestNo === undefined) {
+      window
+        .showInformationMessage(
+          "Could not find related pull requet. Open the commit page."
+        )
+        .then(selection => {
+          openUrl(url);
+        });
+    } else {
+      openUrl(url);
+    }
   }
 }

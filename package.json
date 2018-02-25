@@ -31,12 +31,12 @@
   },
   "devDependencies": {
     "@types/mocha": "^2.2.42",
+    "@types/lodash": "^4.14.104",
     "@types/node": "^7.0.43",
     "typescript": "^2.6.1",
     "vscode": "^1.1.6"
   },
   "dependencies": {
-    "moment": "^2.20.1",
-    "valid-url": "^1.0.9"
+    "lodash": "^4.17.5"
   }
 }
