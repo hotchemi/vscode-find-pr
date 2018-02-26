@@ -7,23 +7,30 @@
   "engines": {
     "vscode": "^1.19.0"
   },
-  "categories": [
-    "SCM Providers"
-  ],
-  "activationEvents": [
-    "onCommand:find-pr.findPullRequest"
-  ],
+  "categories": ["Debuggers"],
+  "icon": "images/logo.png",
+  "bugs": {
+    "url": "https://github.com/hotchemi/vscode-find-pr/issues"
+  },
+  "homepage":
+    "https://github.com/hotchemi/vscode-find-pr",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hotchemi/vscode-find-pr.git"
+  },
+  "license": "Apache License 2.0",
+  "activationEvents": ["onCommand:findpr.findPullRequest"],
   "main": "./out/extension",
   "contributes": {
     "commands": [
       {
-        "command": "find-pr.findPullRequest",
+        "command": "findpr.findPullRequest",
         "title": "Find Pull Request"
       }
     ],
     "keybindings": [
       {
-        "command": "find-pr.findPullRequest",
+        "command": "findpr.findPullRequest",
         "key": "alt+f",
         "mac": "alt+f"
       }

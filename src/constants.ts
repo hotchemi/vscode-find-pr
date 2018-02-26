@@ -1,2 +1,2 @@
 export const git = 'git';
-export const command = 'find-pr.findPullRequest';
+export const command = 'findpr.findPullRequest';
