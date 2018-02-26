@@ -1,5 +1,6 @@
 import { isEmpty } from 'lodash';
 import { window } from 'vscode';
+import { open } from './constants';
 import {
   activeFile,
   activeLineNumber,
@@ -50,7 +51,6 @@ export function findPullRequest() {
 
   const url = githubUrl(remoteUrl, pullRequestNo, hash, md5Hash);
   if (pullRequestNo === undefined) {
-    const open = 'Open';
     window
       .showInformationMessage(
         'Could not find related pull requet. Open the commit page.',
