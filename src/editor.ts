@@ -1,4 +1,4 @@
-import { window, TextDocument, workspace, TextEditor } from "vscode";
+import { TextDocument, window, workspace } from 'vscode';
 
 export function activeFile(): TextDocument | undefined {
   return window.activeTextEditor && window.activeTextEditor.document;
@@ -16,5 +16,5 @@ export function rootPath(): string | undefined {
 
 export function isActiveEditorValid(): boolean {
   const doc = window.activeTextEditor && window.activeTextEditor.document;
-  return doc && !doc.isUntitled;
+  return doc ? !doc.isUntitled : false;
 }

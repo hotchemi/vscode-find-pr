@@ -7,7 +7,16 @@
             "es6"
         ],
         "sourceMap": true,
-        "rootDir": "src"
+        "rootDir": "src",
+        "allowSyntheticDefaultImports": true,
+        "noImplicitAny": false,
+        "preserveConstEnums": true,
+        "allowJs": false,
+        "noImplicitReturns": true,
+        "noUnusedParameters": true,
+        "noUnusedLocals": true,
+        "skipLibCheck": true,
+        "strict": true
     },
     "exclude": [
         "node_modules",

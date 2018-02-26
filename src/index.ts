@@ -1,23 +1,23 @@
-import { window } from "vscode";
-import { blame, getPullRequestNumber, findRemoteUrl, execOptions } from "./git";
-import { githubUrl, openUrl, relativeFilePath, md5 } from "./utils";
-import { isEmpty } from "lodash";
+import { isEmpty } from 'lodash';
+import { window } from 'vscode';
 import {
   activeFile,
   activeLineNumber,
   isActiveEditorValid,
-  rootPath
-} from "./editor";
+  rootPath,
+} from './editor';
+import { blame, execOptions, findRemoteUrl, getPullRequestNo } from './git';
+import { githubUrl, md5, openUrl, relativeFilePath } from './utils';
 
 export function findPullRequest() {
   if (!isActiveEditorValid()) {
-    window.showErrorMessage("Could not find active titled document.");
+    window.showErrorMessage('Could not find active titled document.');
     return;
   }
 
   const root = rootPath();
   if (root === undefined) {
-    window.showErrorMessage("No folder has been opened.");
+    window.showErrorMessage('No folder has been opened.');
     return;
   }
 
@@ -31,26 +31,35 @@ export function findPullRequest() {
   const file = activeFile();
   const line = activeLineNumber();
   if (file === undefined || line === undefined) {
-    window.showErrorMessage("Could not find active document.");
+    window.showErrorMessage('Could not find active document.');
     return;
   }
 
   const hash = blame(file.fileName, line, options);
   if (hash === undefined || isEmpty(hash)) {
-    window.showErrorMessage("Could not find revision hash.");
+    window.showErrorMessage('Could not find revision hash.');
     return;
   }
 
-  const pullRequestNo = getPullRequestNumber(hash, options);
+  const pullRequestNo = getPullRequestNo(hash, options);
   const md5Hash = md5(relativeFilePath());
+  if (md5Hash === undefined) {
+    window.showErrorMessage('Could not generate md5 hash.');
+    return;
+  }
+
   const url = githubUrl(remoteUrl, pullRequestNo, hash, md5Hash);
   if (pullRequestNo === undefined) {
+    const open = 'Open';
     window
       .showInformationMessage(
-        "Could not find related pull requet. Open the commit page."
+        'Could not find related pull requet. Open the commit page.',
+        open,
       )
       .then(selection => {
-        openUrl(url);
+        if (selection === open) {
+          openUrl(url);
+        }
       });
   } else {
     openUrl(url);
