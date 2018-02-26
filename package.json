@@ -28,6 +28,19 @@
         "title": "Find Pull Request"
       }
     ],
+    "configuration": {
+      "type": "object",
+      "title": "vscode-find-pr configuration",
+      "properties": {
+        "findpr.remoteUri": {
+          "type": [
+            "string"
+          ],
+          "default": "origin",
+          "description": "Configure a target remote uri."
+        }
+      }
+    },
     "keybindings": [
       {
         "command": "findpr.findPullRequest",
