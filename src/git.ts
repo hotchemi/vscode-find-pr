@@ -37,7 +37,7 @@ export const getPullRequestNo = (
 
 export const findRemoteUrl = (options: SpawnSyncOptions): string | Error => {
   const stdout = spawnSync(git, ['remote'], options).stdout.toString();
-  var remotes = stdout
+  const remotes = stdout
     .replace(/,/g, '')
     .split(/\r\n|\r|\n/)
     .filter(Boolean);
@@ -46,10 +46,9 @@ export const findRemoteUrl = (options: SpawnSyncOptions): string | Error => {
   } else if (remotes.length === 0) {
     return new Error('No remote repo has been registered.');
   }
-  const remote = remotes[0];
   return spawnSync(
     git,
-    ['remote', 'get-url', remote],
+    ['remote', 'get-url', remotes[0]],
     options,
   ).stdout.toString();
 };
