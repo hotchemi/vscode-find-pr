@@ -1,16 +1,10 @@
 import { commands, ExtensionContext } from "vscode";
-import { Controller } from "./controller";
+import { findPullRequest } from "./";
 import { command } from "./constants";
 
 export function activate(context: ExtensionContext) {
-  const controller = new Controller();
-  const disposable = commands.registerCommand(
-    command,
-    controller.execute,
-    controller
-  );
+  const disposable = commands.registerCommand(command, findPullRequest);
   context.subscriptions.push(disposable);
 }
 
-export function deactivate() {
-}
+export function deactivate() {}
