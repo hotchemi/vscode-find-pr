@@ -9,7 +9,7 @@ A vscode plugin jumps to pull request url.
 - Open _Visual Studio Code_
 - Press `Ctrl+Shift+X` or `⇧⌘X`
 - Type `find-pr`
-- Click install on _ vscode-find-pr_
+- Click install on _vscode-find-pr_
 
 ## Usage
 
@@ -21,7 +21,7 @@ A vscode plugin jumps to pull request url.
 ## Licence
 
 ```
-Copyright 2016 Shintaro Katafuchi, Marcel Schnelle, Yoshinori Isogai
+Copyright 2018 Shintaro Katafuchi
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
