@@ -32,12 +32,12 @@
       "type": "object",
       "title": "vscode-find-pr configuration",
       "properties": {
-        "findpr.remoteUri": {
+        "findpr.remote": {
           "type": [
             "string"
           ],
           "default": "origin",
-          "description": "Configure a target remote uri."
+          "description": "Configure a target remote repository name."
         }
       }
     },
