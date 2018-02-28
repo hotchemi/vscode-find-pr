@@ -1,6 +1,7 @@
 import { isEmpty } from 'lodash';
 import { window } from 'vscode';
-import { open, showDescriptionConfig } from './constants';
+import { showDescriptionConfig } from './configurations';
+import { open } from './constants';
 import {
   activeFile,
   activeLineNumber,

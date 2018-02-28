@@ -27,13 +27,13 @@ export function githubUrl(
   pullRequestNo: string | undefined,
   hash: string,
   md5Hash: string,
-  showDescription: boolean,
+  showDesc: boolean,
 ): string {
   if (pullRequestNo === undefined) {
     return `${remoteUrl}/commit/${hash}#diff-${md5Hash}`;
   } else {
-    const urlPath = showDescription ? undefined : `/files#diff-${md5Hash}`;
-    return `${remoteUrl}/pull/${pullRequestNo}${urlPath}`;
+    const lastPath = showDesc ? '' : `/files#diff-${md5Hash}`;
+    return `${remoteUrl}/pull/${pullRequestNo}${lastPath}`;
   }
 }
 

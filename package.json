@@ -48,6 +48,7 @@
                     ],
                     "default": false,
                     "description": "Show pull request description when opening url."
+                }
             }
         },
         "keybindings": [
