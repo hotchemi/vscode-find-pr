@@ -14,9 +14,19 @@ A vscode plugin jumps to pull request url.
 ## Usage
 
 - Press `Ctrl+Shift+P` or `⇧⌘P`
-- Type `Find pull request`
-  - Default keybind for the action `Alt+F`
-- Execute the command!
+- Type `Find Pull Request`
+  - Or Default keybind for the action `Alt+F`
+- Just execute the command
+
+## Configuration
+
+You can configure some of plugin settings by adding below into your workspace setting file.
+
+```sh
+{
+  "findpr.remote": "feature-branch", # specify target remote git repository, default is "origin"
+}
+```
 
 ## Licence
 

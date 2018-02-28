@@ -28,6 +28,19 @@
         "title": "Find Pull Request"
       }
     ],
+    "configuration": {
+      "type": "object",
+      "title": "Find Pull Request",
+      "properties": {
+        "findpr.remote": {
+          "type": [
+            "string"
+          ],
+          "default": "origin",
+          "description": "Configure a target remote repository name."
+        }
+      }
+    },
     "keybindings": [
       {
         "command": "findpr.findPullRequest",
