@@ -41,6 +41,13 @@
                     ],
                     "default": "origin",
                     "description": "Configure a target remote repository name."
+                },
+                "findpr.showDescription": {
+                    "type": [
+                        "boolean"
+                    ],
+                    "default": false,
+                    "description": "Show pull request description when opening url."
                 }
             }
         },

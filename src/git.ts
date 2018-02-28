@@ -1,5 +1,6 @@
 import { spawnSync, SpawnSyncOptions } from 'child_process';
-import { git, remoteConfig } from './constants';
+import { remoteConfig } from './configurations';
+import { git } from './constants';
 
 export function execOptions(cwd: string): SpawnSyncOptions {
   return {

@@ -25,6 +25,7 @@ You can configure some of plugin settings by adding below into your workspace se
 ```sh
 {
   "findpr.remote": "feature-branch", # specify target remote git repository, default is "origin"
+  "findpr.showDescription": true, # open pull request description page, default is false
 }
 ```
 

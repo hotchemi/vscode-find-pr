@@ -1,5 +1,6 @@
 import { isEmpty } from 'lodash';
 import { window } from 'vscode';
+import { showDescriptionConfig } from './configurations';
 import { open } from './constants';
 import {
   activeFile,
@@ -49,7 +50,7 @@ export function findPullRequest() {
     return;
   }
 
-  const url = githubUrl(remoteUrl, pullRequestNo, hash, md5Hash);
+  const url = githubUrl(remoteUrl, pullRequestNo, hash, md5Hash, showDescriptionConfig);
   if (pullRequestNo === undefined) {
     window
       .showInformationMessage(
