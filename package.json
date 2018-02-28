@@ -30,7 +30,7 @@
     ],
     "configuration": {
       "type": "object",
-      "title": "vscode-find-pr configuration",
+      "title": "Find Pull Request",
       "properties": {
         "findpr.remote": {
           "type": [
