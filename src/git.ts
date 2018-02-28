@@ -41,9 +41,6 @@ export const findRemoteUrl = (options: SpawnSyncOptions): string | Error => {
     .replace(/,/g, '')
     .split(/\r\n|\r|\n/)
     .filter(Boolean);
-  if (remotes.length === 0) {
-    return new Error('No remote repo has been registered.');
-  }
   const index = remotes.indexOf(remoteConfig);
   if (index === -1) {
     return new Error('Could not find configured remote repository.');
