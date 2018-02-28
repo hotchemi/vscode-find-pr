@@ -1,81 +1,84 @@
 {
-  "name": "vscode-find-pr",
-  "displayName": "vscode-find-pr",
-  "description": "A vscode plugin jumps to pull request url.",
-  "version": "0.1.0",
-  "publisher": "hotchemi",
-  "engines": {
-    "vscode": "^1.19.0"
-  },
-  "categories": ["Debuggers"],
-  "icon": "images/logo.png",
-  "bugs": {
-    "url": "https://github.com/hotchemi/vscode-find-pr/issues"
-  },
-  "homepage":
-    "https://github.com/hotchemi/vscode-find-pr",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/hotchemi/vscode-find-pr.git"
-  },
-  "license": "Apache License 2.0",
-  "activationEvents": ["onCommand:findpr.findPullRequest"],
-  "main": "./out/extension",
-  "contributes": {
-    "commands": [
-      {
-        "command": "findpr.findPullRequest",
-        "title": "Find Pull Request"
-      }
-    ],
-    "configuration": {
-      "type": "object",
-      "title": "Find Pull Request",
-      "properties": {
-        "findpr.remote": {
-          "type": [
-            "string"
-          ],
-          "default": "origin",
-          "description": "Configure a target remote repository name."
-        }
-      }
+    "name": "vscode-find-pr",
+    "displayName": "vscode-find-pr",
+    "description": "A vscode plugin jumps to pull request url.",
+    "version": "0.2.0",
+    "publisher": "hotchemi",
+    "engines": {
+        "vscode": "^1.19.0"
     },
-    "keybindings": [
-      {
-        "command": "findpr.findPullRequest",
-        "key": "alt+f",
-        "mac": "alt+f"
-      }
-    ]
-  },
-  "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "postinstall": "node ./node_modules/vscode/bin/install",
-    "test": "npm run compile && node ./node_modules/vscode/bin/test",
-    "lint": "tslint --project tsconfig.json",
-    "lint:fix": "tslint --fix --project tsconfig.json",
-    "precommit": "lint-staged"
-  },
-  "lint-staged": {
-    "src/**/*.{ts,tsx}": [
-      "prettier --write --single-quote --trailing-comma all",
-      "git add"
-    ]
-  },
-  "devDependencies": {
-    "@types/mocha": "^2.2.42",
-    "@types/lodash": "^4.14.104",
-    "@types/node": "^7.0.43",
-    "prettier": "1.7.4",
-    "tslint": "^5.8.0",
-    "tslint-config-prettier": "^1.6.0",
-    "typescript": "^2.6.1",
-    "vscode": "^1.1.6"
-  },
-  "dependencies": {
-    "lodash": "^4.17.5"
-  }
+    "categories": [
+        "Debuggers"
+    ],
+    "icon": "images/logo.png",
+    "bugs": {
+        "url": "https://github.com/hotchemi/vscode-find-pr/issues"
+    },
+    "homepage": "https://github.com/hotchemi/vscode-find-pr",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/hotchemi/vscode-find-pr.git"
+    },
+    "license": "Apache License 2.0",
+    "activationEvents": [
+        "onCommand:findpr.findPullRequest"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "findpr.findPullRequest",
+                "title": "Find Pull Request"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "Find Pull Request",
+            "properties": {
+                "findpr.remote": {
+                    "type": [
+                        "string"
+                    ],
+                    "default": "origin",
+                    "description": "Configure a target remote repository name."
+                }
+            }
+        },
+        "keybindings": [
+            {
+                "command": "findpr.findPullRequest",
+                "key": "alt+f",
+                "mac": "alt+f"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test",
+        "lint": "tslint --project tsconfig.json",
+        "lint:fix": "tslint --fix --project tsconfig.json",
+        "precommit": "lint-staged"
+    },
+    "lint-staged": {
+        "src/**/*.{ts,tsx}": [
+            "prettier --write --single-quote --trailing-comma all",
+            "git add"
+        ]
+    },
+    "devDependencies": {
+        "@types/mocha": "^2.2.42",
+        "@types/lodash": "^4.14.104",
+        "@types/node": "^7.0.43",
+        "prettier": "1.7.4",
+        "tslint": "^5.8.0",
+        "tslint-config-prettier": "^1.6.0",
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6"
+    },
+    "dependencies": {
+        "lodash": "^4.17.5"
+    }
 }
