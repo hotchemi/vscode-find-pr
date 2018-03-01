@@ -52,7 +52,6 @@ export const findRemoteUrl = (options: SpawnSyncOptions): string | Error => {
     options,
   ).stdout.toString();
   if (url.startsWith(git)) {
-    // address git schema
     return convertToHttpsSchema(url);
   }
   return url;
@@ -60,7 +59,7 @@ export const findRemoteUrl = (options: SpawnSyncOptions): string | Error => {
 
 export const convertToHttpsSchema = (url: string): string => {
   return url
-    .replace('git@', 'https://')
-    .replace(':', '/')
-    .replace('.git', '');
+    .replace(/^git@/, 'https://')
+    .replace('github.com:', 'github.com/')
+    .replace(/.git$/, '');
 };
