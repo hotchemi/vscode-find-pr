@@ -46,9 +46,20 @@ export const findRemoteUrl = (options: SpawnSyncOptions): string | Error => {
   if (index === -1) {
     return new Error('Could not find configured remote repository.');
   }
-  return spawnSync(
+  const url = spawnSync(
     git,
     ['remote', 'get-url', remotes[index]],
     options,
   ).stdout.toString();
+  if (url.startsWith(git)) {
+    return convertToHttpsSchema(url);
+  }
+  return url;
+};
+
+export const convertToHttpsSchema = (url: string): string => {
+  return url
+    .replace(/^git@/, 'https://')
+    .replace('github.com:', 'github.com/')
+    .replace(/.git$/, '');
 };
