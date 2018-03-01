@@ -2,7 +2,7 @@
     "name": "vscode-find-pr",
     "displayName": "vscode-find-pr",
     "description": "A vscode plugin jumps to pull request url.",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "publisher": "hotchemi",
     "engines": {
         "vscode": "^1.19.0"
