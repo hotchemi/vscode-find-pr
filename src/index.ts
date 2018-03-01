@@ -54,7 +54,7 @@ export function findPullRequest() {
   if (pullRequestNo === undefined) {
     window
       .showInformationMessage(
-        'Could not find related pull requet. Open the commit page.',
+        'Could not find related pull request. Open the commit page.',
         open,
       )
       .then(selection => {
