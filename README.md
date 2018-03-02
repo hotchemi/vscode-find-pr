@@ -1,4 +1,4 @@
-# vscode-find-pr [![Build Status](https://travis-ci.org/hotchemi/vscode-find-pr.svg?branch=master)](https://travis-ci.org/hotchemi/vscode-find-pr)
+# vscode-find-pr [![Build Status](https://travis-ci.org/hotchemi/vscode-find-pr.svg?branch=master)](https://travis-ci.org/hotchemi/vscode-find-pr) [![](https://vsmarketplacebadge.apphb.com/version-short/hotchemi.vscode-find-pr.svg)](https://marketplace.visualstudio.com/items?itemName=hotchemi.vscode-find-pr)
 
 A vscode plugin jumps to pull request url.
 
