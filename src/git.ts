@@ -62,5 +62,5 @@ export const convertToHttpsSchema = (url: string): string => {
   return url
     .replace(/^git@/, 'https://')
     .replace('github.com:', 'github.com/')
-    .replace(/.git$/, '');
+    .replace(/\.git$/, '');
 };
