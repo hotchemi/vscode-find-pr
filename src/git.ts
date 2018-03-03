@@ -51,7 +51,6 @@ export const findRemoteUrl = (options: SpawnSyncOptions): string | Error => {
     ['remote', 'get-url', remotes[index]],
     options,
   ).stdout.toString().trim();
-
   if (url.startsWith(git)) {
     return convertToHttpsSchema(url);
   }
